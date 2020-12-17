@@ -1,0 +1,23 @@
+version: '3'
+services:
+  codeceptjs:
+    image: codeception/codeceptjs:2.6.4
+    depends_on:
+      - grafana
+      - firefox
+      - puppeteer
+    volumes:
+      - .:/tests
+
+    
+    command: 'bash -c "sleep 5 && /codecept/docker/run.sh"'
+  firefox:
+    image: selenium/standalone-firefox
+  grafana:
+    image: grafana/grafana:7.3.4
+    environment:
+            GF_SECURITY_ADMIN_PASSWORD: 'newpass'
+  puppeteer:
+    image: buildkite/puppeteer:5.2.1
+  
+  
